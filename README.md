@@ -1,8 +1,8 @@
 <p align="center"><img src ="http://www.sigfox.com/themes/custom/sigfox/images/logo-2016.svg" width="300"></p>
 
-## SIGFOX Python Flask Callback Tutorial
+## Sigfox Python Flask Callback Tutorial
 
-This tutorial briefly explains how to use SIGFOX's callback method to POST data to a Python Flask server. This example utilises a mock/placeholder 'Temperature' sensor that is represented by an Akeru Board (by Snootlabs) but could easily be replaced with a SIGFOX enabled device of your choosing. We'll use ngrok to publicly expose our server for testing purposes.
+This tutorial briefly explains how to use Sigfox's callback method to POST data to a Python Flask server. This example utilises a mock/placeholder 'Temperature' sensor that is represented by an Akeru Board (by Snootlabs) but could easily be replaced with a Sigfox enabled device of your choosing. We'll use ngrok to publicly expose our server for testing purposes.
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/sigfox-graph.png" width="900"></p>
 
@@ -25,7 +25,7 @@ If you do not have these libraries/packages installed please follow the attached
 **Arduino**
 
 * [Snootlabs Akeru Arduino Board](http://snootlab.com/lang-en/snootlab-shields/829-akeru-beta-33-en.html)
-* [Akeru (SIGFOX) Library](https://github.com/Snootlab/Akeru)
+* [Akeru (Sigfox) Library](https://github.com/Snootlab/Akeru)
 
 **Ngrok**
 
@@ -33,11 +33,11 @@ If you do not have these libraries/packages installed please follow the attached
 
 ### Getting Started
 
-To begin we must first start by configuring our server to receive data from the SIGFOX Backend. Flask is a great package for handling HTTP requests and we'll use it to accept incoming POST requests from the SIGFOX Backend to display in our web browser.
+To begin we must first start by configuring our server to receive data from the Sigfox Backend. Flask is a great package for handling HTTP requests and we'll use it to accept incoming POST requests from the Sigfox Backend to display in our web browser.
 
 ### Python
 
-We'll start by configuring two end points on the server, /data/<sensor> and /graph. The /data/<sensor> endpoint will be where SIGFOX will post our sensor data to. We've set it up to pass a <sensor> value so that if we decide to include multiple devices with multiple sensors we can differentiate which sensor data we have received.
+We'll start by configuring two end points on the server, /data/<sensor> and /graph. The /data/<sensor> endpoint will be where Sigfox will post our sensor data to. We've set it up to pass a <sensor> value so that if we decide to include multiple devices with multiple sensors we can differentiate which sensor data we have received.
 
 Create two methods as shown below and import the required packages...
 
@@ -187,7 +187,7 @@ Create a canvas element with the id, 'myChart' and create an empty script tag.
             data: {
                 labels: dates,
                 datasets: [{
-                    label: 'SIGFOX Temperature',
+                    label: 'Sigfox Temperature',
                     data: temps,
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.2)',
@@ -231,7 +231,7 @@ Akeru akeru(RX, TX);
 int8_t randNumber;
 ```
 
-Lets begin by creating a new Arduino sketch and including the Akeru library. We'll define the serial RX and TX pins required to communicate to the SIGFOX module and instantiate a variable we'll use to hold our random number that we can use for testing.
+Lets begin by creating a new Arduino sketch and including the Akeru library. We'll define the serial RX and TX pins required to communicate to the Sigfox module and instantiate a variable we'll use to hold our random number that we can use for testing.
 
 ```arduino
 #include <Akeru.h>
@@ -317,13 +317,13 @@ void loop()
 }
 ```
 
-We can now start building our loop() function. Start by generating a random number and storing it to the variable we created earlier. You can choose the value that goes inside the random() function or leave it set at 100 (this generate a value between 0 and 100). We then need to convert the value to Hexidecimal (required for SIGFOX server side decoding of the data) and then we can transmit the payload!
+We can now start building our loop() function. Start by generating a random number and storing it to the variable we created earlier. You can choose the value that goes inside the random() function or leave it set at 100 (this generate a value between 0 and 100). We then need to convert the value to Hexidecimal (required for Sigfox server side decoding of the data) and then we can transmit the payload!
 
 That's it for Arduino! Compile your sketch and upload it to the Akeru board.
 
 ### Ngrok
 
-Now we'll take a look at ngrok as a method of exposing your python server publicly so that the SIGFOX Backend can POST data to it. Assuming you have ngrok already installed enter the following command into your terminal.
+Now we'll take a look at ngrok as a method of exposing your python server publicly so that the Sigfox Backend can POST data to it. Assuming you have ngrok already installed enter the following command into your terminal.
 
 ```bash
 $ ngrok http 5000
@@ -333,11 +333,11 @@ This will expose your server (on the port 5000) publicly. To double check that t
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/ngrok.png" width="600"></p>
 
-If that works for you, you're almost there! We just need to setup the SIGFOX Backend now.
+If that works for you, you're almost there! We just need to setup the Sigfox Backend now.
 
 ### SIGFOX Backend
 
-Direct your browser to https://backend.sigfox.com. If you haven't yet activated your Akeru module, you will need to do this now. Navigate to https://backend.sigfox.com/activate and choose Snootlab as your Dev Kit provider. Next pick your country and respective provider. Find your Akeru's Device ID and PAC number as you'll need these for activation (you can find them on the box that the device came in!). You'll then be asked to enter some personal details and create an account. Do this and you should be registered on the SIGFOX Backend! Check the email account that you registered with and you should have a link inviting you to activate your account. The device you added should appear in your account!
+Direct your browser to https://backend.sigfox.com. If you haven't yet activated your Akeru module, you will need to do this now. Navigate to https://backend.sigfox.com/activate and choose Snootlab as your Dev Kit provider. Next pick your country and respective provider. Find your Akeru's Device ID and PAC number as you'll need these for activation (you can find them on the box that the device came in!). You'll then be asked to enter some personal details and create an account. Do this and you should be registered on the Sigfox Backend! Check the email account that you registered with and you should have a link inviting you to activate your account. The device you added should appear in your account!
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/sigfox-activation.png" width="900"></p>
 
@@ -345,13 +345,13 @@ Once you've activated your device and have an account created, log in to the bac
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/sigfox-home.png" width="900"></p>
 
-We need to setup the format that the SIGFOX Backend is expecting to receive from the Akeru device. Log into the Backend and click on the 'Device Type' tab. In the information panel, click 'edit' and a list of fields will appear. We want to set this up such that the server knows what to expect from the device.
+We need to setup the format that the Sigfox Backend is expecting to receive from the Akeru device. Log into the Backend and click on the 'Device Type' tab. In the information panel, click 'edit' and a list of fields will appear. We want to set this up such that the server knows what to expect from the device.
 
-Go to 'Display Type' and select custom from the dropdown box. This lets us customise how to specify the data field. We'll set ours up to use a 'temp::int:8' which is a signed integer of 8 bits. This allows us to simulate negative temperatures if we wish as we'll be staying within temperature values that we could expect in the real world. Click the '?' if you want to find out what other data types the SIGFOX Backend can decode. Click 'OK' to confirm your selection. You will be returned to the 'Device Type' page.
+Go to 'Display Type' and select custom from the dropdown box. This lets us customise how to specify the data field. We'll set ours up to use a 'temp::int:8' which is a signed integer of 8 bits. This allows us to simulate negative temperatures if we wish as we'll be staying within temperature values that we could expect in the real world. Click the '?' if you want to find out what other data types the Sigfox Backend can decode. Click 'OK' to confirm your selection. You will be returned to the 'Device Type' page.
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/sigfox-callback.png" width="900"></p>
 
-Now head to 'Callback' where we'll create a new callback for our SIGFOX device. Click 'New' in the top right corner and you'll be brought into a screen where you can setup a callback for the device. Click 'Custom callback'  and you'll be brought to a page where you'll be presented with a selection of different options to choose from. Choose the following options for your callback:
+Now head to 'Callback' where we'll create a new callback for our Sigfox device. Click 'New' in the top right corner and you'll be brought into a screen where you can setup a callback for the device. Click 'Custom callback'  and you'll be brought to a page where you'll be presented with a selection of different options to choose from. Choose the following options for your callback:
 
 <p align="center"><img src ="https://raw.githubusercontent.com/Bucknalla/sigfox-python-flask/master/images/sigfox-callback-details.png" width="900"></p>
 
@@ -380,7 +380,7 @@ Now head to 'Callback' where we'll create a new callback for our SIGFOX device. 
 }
 ```
 
-Click 'OK' to confirm these details. That's it! Everything should be set up and ready to go now! Your Akeru device will transmit a new message every 10 minutes over SIGFOX and you should see the incoming requests reach your flask server via the debug interface.
+Click 'OK' to confirm these details. That's it! Everything should be set up and ready to go now! Your Akeru device will transmit a new message every 10 minutes over Sigfox and you should see the incoming requests reach your flask server via the debug interface.
 
 ### Further Learning/Exploration
 
@@ -392,4 +392,4 @@ Finished this tutorial and want to extend its functionality? Here's a couple of 
 
 * Add additional SIGFOX enabled devices to send more data to the server!
 
-If you want to learn more about SIGFOX and how to get your devices connected to our network check out some of our other tutorials and documentation!
+If you want to learn more about Sigfox and how to get your devices connected to our network check out some of our other tutorials and documentation!
